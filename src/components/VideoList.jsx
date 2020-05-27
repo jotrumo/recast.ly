@@ -1,10 +1,14 @@
-var VideoList = () => (
+//import
+import VideoListEntry from './VideoListEntry.js';
+//create a function that maps through the example data, calling video list entry to format it correctly
+
+var VideoList = (props) => (
   <div className="video-list">
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
+    <div><h5><em>{VideoListEntry(props[0])}</em> view goes here</h5></div>
+    <div><h5><em>{VideoListEntry(props[1])}</em> view goes here</h5></div>
+    <div><h5><em>{VideoListEntry(props[2])}</em> view goes here</h5></div>
+    <div><h5><em>{VideoListEntry(props[3])}</em> view goes here</h5></div>
+    <div><h5><em>{VideoListEntry(props[4])}</em> view goes here</h5></div>
   </div>
 );
 
