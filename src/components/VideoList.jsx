@@ -2,15 +2,16 @@
 import VideoListEntry from './VideoListEntry.js';
 //create a function that maps through the example data, calling video list entry to format it correctly
 
-var VideoList = (props) => (
-  <div className="video-list">
-    <div><h5><em>{VideoListEntry(props[0])}</em> view goes here</h5></div>
-    <div><h5><em>{VideoListEntry(props[1])}</em> view goes here</h5></div>
-    <div><h5><em>{VideoListEntry(props[2])}</em> view goes here</h5></div>
-    <div><h5><em>{VideoListEntry(props[3])}</em> view goes here</h5></div>
-    <div><h5><em>{VideoListEntry(props[4])}</em> view goes here</h5></div>
-  </div>
-);
+var VideoList = (props) =>{
+  //console.log(props)
+  return (
+    <div className="video-list">
+      {props.videos.map((video, index) =>
+        <VideoListEntry key={video + index} video={video} onVideoClick={props.onVideoClick}/>
+      )}
+    </div>
+  );
+};
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated
