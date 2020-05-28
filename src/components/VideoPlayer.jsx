@@ -1,17 +1,16 @@
-import App from './App.js';
-
-var VideoPlayer = (props) => {
-  //console.log(props)
+var VideoPlayer = ({video}) => {
+  //console.log(video)
   return (
-    <div className="video-player">
-      <div className="embed-responsive embed-responsive-16by9">
-        <iframe className="embed-responsive-item" src={`https://www.youtube.com/embed/${props.video.id.videoId}`} allowFullScreen></iframe>
+    !video ? <div className="video-player">Please wait...</div> :
+      <div className="video-player">
+        <div className="embed-responsive embed-responsive-16by9">
+          <iframe className="embed-responsive-item" src={`https://www.youtube.com/embed/${video.id.videoId}`} allowFullScreen></iframe>
+        </div>
+        <div className="video-player-details">
+          <h3>{video.snippet.title}</h3>
+          <div>{video.snippet.description}</div>
+        </div>
       </div>
-      <div className="video-player-details">
-        <h3>{props.video.snippet.title}</h3>
-        <div>{props.video.snippet.description}</div>
-      </div>
-    </div>
   );
 };
 

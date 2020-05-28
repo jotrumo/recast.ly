@@ -1,19 +1,39 @@
 import VideoList from './VideoList.js';
-import exampleVideoData from '../data/exampleVideoData.js';
+//import exampleVideoData from '../data/exampleVideoData.js';
 import VideoPlayer from './VideoPlayer.js';
 import Search from './Search.js';
-//import searchYouTube from './Search.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     console.log(this.props.searchYouTube);
     this.state = {
-      playVideo: exampleVideoData[0]
+      videos: [],
+      playVideo: null
     };
 
     this.onVideoClick = this.onVideoClick.bind(this);
   }
+
+  componentDidMount() {
+    this.getVideos('react tutorials');
+  }
+
+  getVideos(query) {
+    var options = {
+      key: this.props.APIKey,
+      query: query
+    };
+
+
+    this.props.searchYouTube(options, (videos) =>
+      this.setState({
+        videos: videos,
+        playVideo: videos[0]
+      })
+    );
+  }
+
   onVideoClick(video) {
     this.setState({
       playVideo: video
@@ -21,8 +41,6 @@ class App extends React.Component {
   }
 
   render() {
-
-
     return (
       <div>
         <nav className="navbar">
@@ -35,7 +53,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.playVideo} />
           </div>
           <div className="col-md-5">
-            <VideoList videos={exampleVideoData} onVideoClick={this.onVideoClick}/>
+            <VideoList videos={this.state.videos} onVideoClick={this.onVideoClick}/>
           </div>
         </div>
       </div>
