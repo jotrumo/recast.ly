@@ -6,18 +6,17 @@ import Search from './Search.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.searchYouTube);
+    //console.log(this.props.searchYouTube);
     this.state = {
       videos: [],
-      playVideo: null
+      currentVideo: null
     };
-
-    this.onVideoClick = this.onVideoClick.bind(this);
   }
 
   componentDidMount() {
     this.getVideos('react tutorials');
   }
+
 
   getVideos(query) {
     var options = {
@@ -29,14 +28,14 @@ class App extends React.Component {
     this.props.searchYouTube(options, (videos) =>
       this.setState({
         videos: videos,
-        playVideo: videos[0]
+        currentVideo: videos[0]
       })
     );
   }
 
   onVideoClick(video) {
     this.setState({
-      playVideo: video
+      currentVideo: video
     });
   }
 
@@ -45,15 +44,20 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search />
+            <Search handleSearchInput={this.getVideos.bind(this)}/>
           </div>
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={this.state.playVideo} />
+            <VideoPlayer
+              video={this.state.currentVideo}
+            />
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.videos} onVideoClick={this.onVideoClick}/>
+            <VideoList
+              videos={this.state.videos}
+              onVideoClick={this.onVideoClick.bind(this)}
+            />
           </div>
         </div>
       </div>

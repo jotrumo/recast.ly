@@ -6,21 +6,17 @@
 
 
 var VideoListEntry = (props) => {
-  //this isn't registering correctly, when calling on line 23
-  var eventHandler = function (e) {
-    e.preventDefault();
-    //console.log('this: ' + this)
-    //console.log('')
-    props.onVideoClick(props.video);
-  };
-  //console.log(props)
+
   return (
     <div className="video-list-entry media" >
       <div className="media-left media-middle">
         <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt="" />
       </div>
       <div className="media-body">
-        <div className="video-list-entry-title" onClick={eventHandler}>{props.video.snippet.title}</div>
+        <div
+          className="video-list-entry-title"
+          onClick={() => { props.onVideoClick(props.video); }}>
+          {props.video.snippet.title}</div>
         <div className="video-list-entry-detail">{props.video.snippet.description}</div>
       </div>
     </div>
